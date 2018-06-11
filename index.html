@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Todo List</title>
+  <!-- BS4 -->
+  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
+  <!-- google font -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:500" rel="stylesheet">
+  <!-- font-awesome -->
+  <link rel='stylesheet prefetch' href='https://use.fontawesome.com/releases/v5.0.13/css/all.css'>
+
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div id="app">
+    <header>
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">My Tasks</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">In Progress</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Completed</a>
+        </li>
+      </ul>
+    </header>
+    <div class="container">
+      <input @keydown.enter="addTodo" @click="toogleAdd" type="text" class="addTodo form-control form-control-lg" v-model="todoname">
+
+      <div class="editPanel" v-if="showAdd">
+        <!-- deadline -->
+        <div class="deadline">
+          <h6>deadline</h6>
+          <!-- 日期 -->
+          <input type="date" v-model="date">
+          <!-- 時間 -->
+          <input type="time" v-model="time">
+        </div>
+        <!-- file -->
+        <div class="file">
+          <h6>file</h6>
+          <input type="file">
+        </div>
+        <!-- comment -->
+        <div class="comment">
+          <h6>comment</h6>
+          <textarea name="" id="" cols="60" rows="5" v-model="comments"></textarea>
+        </div>
+        <div class="btns">
+          <button @click="cancelAdd" class="btn btn-lg">cancel</button>
+          <button @click="addTodo" class="btn btn-lg btn-primary">add task</button>
+        </div>
+      </div>
+
+
+      <div class="todos" v-for="(todo,idx) in todoList">
+        <!-- 是否完成 -->
+        <input type="checkbox" v-model="todo.finished">
+        <span :class="{complete:todo.finished}">{{todo.todoname}}</span>
+
+        <!-- 置頂 -->
+        <span class="edit">
+          <span @click="toggleStar(idx)">
+            <i class="fas fa-star" style="color: #F5A623;" v-if="todo.star"></i>
+            <i class="far fa-star" v-else></i>
+          </span>
+          <!-- 修改 -->
+          <i class="far fa-edit" @click="toggleEditbox(idx)"></i>
+          <!-- 刪除 -->
+          <i class="far fa-trash-alt" @click="deleToto(idx)"></i>
+        </span>
+        <br>
+        <i class="far fa-calendar-alt" v-if="todo.date">
+          <span>{{todo.date}}</span>
+        </i>
+        <i class="far fa-file" v-if="todo.file"></i>
+        <i class="far fa-comment-dots" v-if="todo.comments"></i>
+
+        <!-- 修改todo -->
+        <div class="editTodobox" v-if="todo.showEditbox">
+          <input type="text" v-model='todoname'>
+          <!-- deadline -->
+          <div class="deadline">
+            <h6>deadline</h6>
+            <input type="date" v-model="date">
+            <input type="time" v-model="time">
+          </div>
+          <!-- file -->
+          <div class="file">
+            <h6>file</h6>
+            <input type="file" v-on:change="file">
+          </div>
+          <!-- comment -->
+          <div class="comment">
+            <h6>comment</h6>
+            <textarea name="" id="" cols="60" rows="5" v-model="comments"></textarea>
+          </div>
+          <div class="btns">
+            <button @click="cancelAdd" class="btn btn-lg">Cancel</button>
+            <button @click="updateTodo(idx)" class="btn btn-lg btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+
+
+  <!-- JS file -->
+  <!-- lodash -->
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+  <!-- vue -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17-beta.0/vue.js'></script>
+  <!-- vue router -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.js'></script>
+  <!-- jQuery -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js'></script>
+  <!-- BS4 JS -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js'></script>
+  <!-- app.js -->
+  <script src="./app.js"></script>
+</body>
+
+</html>

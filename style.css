@@ -1,0 +1,70 @@
+header {
+  margin-bottom: 20px;
+}
+header ul {
+  height: 40px;
+  background-color: #4a90e2;
+}
+
+ul li a {
+  color: #00408b;
+}
+
+.active {
+  color: #fff;
+}
+.container {
+  position: relative;
+  width: 600px;
+  /* border:1px solid; */
+}
+
+.addtodo {
+  width: 600px;
+}
+
+.todos {
+  /* border:1px solid #000; */
+  margin-top: 10px;
+  width: 550px;
+  padding: 10px;
+  background-color: #fff2dc;
+}
+
+.add {
+  position: relative;
+  display: block;
+  margin-top: -30px;
+  color: red;
+}
+
+.add:hover {
+  cursor: pointer;
+}
+
+.editPanel {
+  margin-top: 10px;
+  width: 570px;
+  height: 609px;
+  padding: 10px;
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.btns button {
+  width: 49%;
+}
+
+.deadline input {
+  display: inline-block;
+}
+
+.edit {
+  float: right;
+}
+
+.complete {
+  text-decoration: line-through;
+}
